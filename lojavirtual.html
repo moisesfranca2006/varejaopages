@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Loja Profissional</title>
+
+<style>
+body { font-family: Arial; margin:0; background:#f5f5f5;}
+header { background:#222; color:#fff; padding:15px; text-align:center;}
+.container { display:flex; }
+
+.produtos {
+  width:70%;
+  display:grid;
+  grid-template-columns:repeat(auto-fill, minmax(200px,1fr));
+  gap:15px;
+  padding:20px;
+}
+
+.card {
+  background:#fff;
+  border-radius:10px;
+  padding:10px;
+  text-align:center;
+}
+
+.card img { width:100%; height:150px; object-fit:cover; }
+
+.card button {
+  background:#28a745;
+  color:#fff;
+  border:none;
+  padding:8px;
+  cursor:pointer;
+  border-radius:5px;
+}
+
+.carrinho {
+  width:30%;
+  background:#fff;
+  padding:20px;
+  border-left:2px solid #ddd;
+}
+
+.item {
+  margin-bottom:10px;
+  border-bottom:1px solid #eee;
+  padding-bottom:10px;
+}
+
+input {
+  width:60px;
+  text-align:center;
+}
+
+.btn {
+  width:100%;
+  padding:10px;
+  margin-top:10px;
+  border:none;
+  cursor:pointer;
+  border-radius:5px;
+}
+
+.whatsapp { background:#25D366; color:white; }
+.pagamento { background:#007bff; color:white; }
+</style>
+</head>
+
+<body>
+
+<header>
+  <h2>🛒 Minha Loja</h2>
+</header>
+
+<div class="container">
+
+<div class="produtos">
+
+  <div class="card">
+    <img src="produto1.jpg">
+    <h4>Carne</h4>
+    <p>R$ 30,00 / kg</p>
+    <button onclick="add('Carne',30,'kg')">Adicionar</button>
+  </div>
+
+  <div class="card">
+    <img src="produto2.jpg">
+    <h4>Tecido</h4>
+    <p>R$ 15,00 / m</p>
+    <button onclick="add('Tecido',15,'m')">Adicionar</button>
+  </div>
+
+</div>
+
+<div class="carrinho">
+  <h3>Carrinho</h3>
+  <div id="lista"></div>
+  <h3>Total: R$ <span id="total">0,00</span></h3>
+
+  <button class="btn whatsapp" onclick="whats()">Finalizar no WhatsApp</button>
+</div>
+
+</div>
+
+<script>
+let carrinho = [];
+
+function formatBR(valor){
+  return valor.toFixed(2).replace('.', ',');
+}
+
+function parseBR(valor){
+  return parseFloat(valor.replace(',', '.')) || 0;
+}
+
+function add(nome, preco, unidade){
+  let item = carrinho.find(p=>p.nome===nome);
+  if(item){
+    item.qtd += 0.1;
+  } else {
+    carrinho.push({nome, preco, qtd:0.1, unidade});
+  }
+  render();
+}
+
+function alterar(nome, valor){
+  let item = carrinho.find(p=>p.nome===nome);
+  if(!item) return;
+
+  item.qtd = parseBR(valor);
+
+  if(item.qtd <= 0){
+    carrinho = carrinho.filter(p=>p.nome!==nome);
+  }
+
+  render();
+}
+
+function mais(nome){
+  let item = carrinho.find(p=>p.nome===nome);
+  item.qtd += 0.1;
+  render();
+}
+
+function menos(nome){
+  let item = carrinho.find(p=>p.nome===nome);
+  item.qtd -= 0.1;
+  if(item.qtd <= 0){
+    carrinho = carrinho.filter(p=>p.nome!==nome);
+  }
+  render();
+}
+
+function render(){
+  let lista = document.getElementById("lista");
+  let total = 0;
+  lista.innerHTML = "";
+
+  carrinho.forEach(item=>{
+    let sub = item.qtd * item.preco;
+    total += sub;
+
+    lista.innerHTML += `
+      <div class="item">
+        <b>${item.nome}</b><br>
+        R$ ${formatBR(item.preco)} / ${item.unidade}<br>
+
+        <button onclick="menos('${item.nome}')">-</button>
+
+        <input value="${formatBR(item.qtd)}"
+               onchange="alterar('${item.nome}', this.value)">
+
+        <button onclick="mais('${item.nome}')">+</button>
+
+        <br>
+        Subtotal: R$ ${formatBR(sub)}
+      </div>
+    `;
+  });
+
+  document.getElementById("total").innerText = formatBR(total);
+}
+
+function whats(){
+  let msg = "Pedido:%0A";
+  let total = 0;
+
+  carrinho.forEach(item=>{
+    let sub = item.qtd * item.preco;
+    total += sub;
+
+    msg += `${item.nome} ${formatBR(item.qtd)} ${item.unidade} = R$ ${formatBR(sub)}%0A`;
+  });
+
+  msg += `%0ATotal: R$ ${formatBR(total)}`;
+
+  window.open(`https://wa.me/5599999999999?text=${msg}`);
+}
+</script>
+
+</body>
+</html>
