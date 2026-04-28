@@ -183,6 +183,7 @@ footer {
 <footer>
   <h3>📍 Contato</h3>
   <p>Alcântara - São Gonçalo - RJ</p>
+  <p>Endereço: Rua São Pedro, 9 Alcântara, SG, RJ</p>  
   <p>📞 (21) 96812-0591</p>
 
   <p>
@@ -265,7 +266,7 @@ function pix(){
   let total=document.getElementById("total").innerText;
 
   document.getElementById("qrcode").innerHTML=`
-    <h4>Pagamento Pix</h4>
+    <h4>Pagamento Pix Chave CNPJ </h4>
     <p>Valor: R$ ${total}</p>
     <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=PIX-${total}">
   `;
