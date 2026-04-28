@@ -2,18 +2,26 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
+<title>Varejão dos Tecidos Alcântara</title>
 
 <style>
 body { font-family: Arial; margin:0; background:#f5f5f5;}
-header { background:#222; color:#fff; padding:15px; text-align:center;}
-.container { display:flex; }
 
-.produtos {
-  width:70%;
-  display:grid;
-  grid-template-columns:repeat(auto-fill, minmax(200px,1fr));
-  gap:15px;
+h1,h2 { text-align:center; margin:5px; }
+
+.container {
+  display:flex;
+  gap:20px;
   padding:20px;
+  flex-wrap:wrap;
+}
+
+/* PRODUTOS */
+.produtos {
+  flex:2;
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(200px,1fr));
+  gap:15px;
 }
 
 .card {
@@ -23,7 +31,22 @@ header { background:#222; color:#fff; padding:15px; text-align:center;}
   text-align:center;
 }
 
-.card img { width:100%; height:150px; object-fit:cover; }
+.card img {
+  width:100%;
+  height:150px;
+  object-fit:cover;
+  transition:0.3s;
+}
+
+.card img:hover {
+  transform:scale(1.1);
+}
+
+.preco {
+  color:#e60000;
+  font-weight:bold;
+  font-size:18px;
+}
 
 .card button {
   background:#28a745;
@@ -34,16 +57,25 @@ header { background:#222; color:#fff; padding:15px; text-align:center;}
   border-radius:5px;
 }
 
+/* CARRINHO */
 .carrinho {
-  width:30%;
+  flex:1;
   background:#fff;
   padding:20px;
   border-left:2px solid #ddd;
+  min-width:250px;
+}
+
+.topo-carrinho {
+  position:sticky;
+  top:0;
+  background:#fff;
+  padding-bottom:10px;
 }
 
 .item {
-  margin-bottom:10px;
   border-bottom:1px solid #eee;
+  margin-bottom:10px;
   padding-bottom:10px;
 }
 
@@ -52,6 +84,7 @@ input {
   text-align:center;
 }
 
+/* BOTÕES */
 .btn {
   width:100%;
   padding:10px;
@@ -62,183 +95,160 @@ input {
 }
 
 .whatsapp { background:#25D366; color:white; }
-.pagamento { background:#007bff; color:white; }
-</style>
-<style>
-  /* Contêiner principal */
-  .container {
-    display: flex; /* Define o layout como flexbox */
-    gap: 20px; /* Espaço entre as colunas */
-  }
+.pix { background:#007bff; color:white; }
 
-  /* Estilo das colunas */
-  .coluna {
-    flex: 1; /* Faz ambas as colunas terem a mesma largura */
-    padding: 20px;
-    border: 1px solid #ccc;
-  }
-</style>  
+/* RODAPÉ */
+footer {
+  background:#222;
+  color:#fff;
+  text-align:center;
+  padding:20px;
+  margin-top:20px;
+}
+</style>
 </head>
 
 <body>
 
-<h1 style="color:#ff0000;"> Varejão dos Tecidos Alcântara</h1>
-<h1 style="color:#ff0000;">Tecidos Diversos</h1>
-<h2 style="color:#000000;">🛒 Minha Loja</h2> 
+<h1 style="color:#ff0000;">Varejão dos Tecidos Alcântara</h1>
+<h2>🛒 Loja Virtual</h2>
 
 <div class="container">
 
+<!-- PRODUTOS -->
 <div class="produtos">
-<div class="coluna" style="background-color: #f0f0f0;">
+
   <div class="card">
     <img src="dish2.png">
-    <h4>Tricoline Estampada 1,40 larg.</h4>
-    <p>R$ 19,90 / m</p>
-    <button onclick="add('Tricoline',19.90,'Mts')">Adicionar</button>
+    <h4>Tricoline Estampada</h4>
+    <p class="preco">R$ 19,90 / m</p>
+    <button onclick="add('Tricoline',19.90,'m')">Adicionar</button>
   </div>
 
   <div class="card">
     <img src="oxfordliso.jpeg">
-    <h4>Oxford liso 1,40 larg.</h4>
-    <p>R$ 7,99 / m</p>
-    <button onclick="add('Oxford',7.99,'Mts')">Adicionar</button>
+    <h4>Oxford Liso</h4>
+    <p class="preco">R$ 7,99 / m</p>
+    <button onclick="add('Oxford',7.99,'m')">Adicionar</button>
   </div>
-<div class="card">
+
+  <div class="card">
     <img src="viscose.png">
-    <h4>Viscose Estampada 1,40 larg.</h4>
-    <p>R$ 16,90 / m</p>
-    <button onclick="add('Viscose',16.90,'Mts')">Adicionar</button>
-  </div>
-
-  <div class="card">
-    <img src="gorgurinho2.jpeg">
-    <h4>Gorgurão Estampada 1,40 larg.</h4>
-    <p>R$ 17,90 / m</p>
-    <button onclick="add('gorgurao',17.90,'Mts')">Adicionar</button>
-  </div>
-<div class="card">
-    <img src="retalhos.jpg">
-    <h4>Retalhos</h4>
-    <p>R$ 4,99 / m</p>
-    <button onclick="add('Retalhos',4.99,'Mts')">Adicionar</button>
-  </div>
-
-  <div class="card">
-    <img src="gabardine.png">
-    <h4>Tecido Brim liso 1,40 larg.</h4>
-    <p>R$ 16,90 / m</p>
-    <button onclick="add('Brim',16.90,'Mts')">Adicionar</button>
+    <h4>Viscose</h4>
+    <p class="preco">R$ 16,90 / m</p>
+    <button onclick="add('Viscose',16.90,'m')">Adicionar</button>
   </div>
 
 </div>
 
-</div>
-
-</div>
-<div class="coluna" style="background-color: #e0e0e0;">
+<!-- CARRINHO -->
 <div class="carrinho">
-  <h3>Carrinho</h3>
+
+  <div class="topo-carrinho">
+    <h3>Carrinho</h3>
+    <h3>Total: R$ <span id="total">0,00</span></h3>
+  </div>
+
   <div id="lista"></div>
-  <h3>Total: R$ <span id="total">0,00</span></h3>
 
   <button class="btn whatsapp" onclick="whats()">Finalizar no WhatsApp</button>
+  <button class="btn pix" onclick="pix()">Pagar com Pix</button>
+
+  <div id="qrcode"></div>
+
 </div>
 
 </div>
+
+<!-- RODAPÉ -->
+<footer>
+  <h3>📍 Contato</h3>
+  <p>Alcântara - São Gonçalo - RJ</p>
+  <p>📞 (21) 96812-0591</p>
+
+  <p>
+    <a href="https://wa.me/5521968120591" target="_blank" style="color:#25D366;">WhatsApp</a> |
+    <a href="#" style="color:#1877F2;">Facebook</a>
+  </p>
+
+  <p style="font-size:12px;">© 2026 Varejão dos Tecidos</p>
+</footer>
 
 <script>
 let carrinho = [];
 
-function formatBR(valor){
-  return valor.toFixed(2).replace('.', ',');
-}
+function formatBR(v){ return v.toFixed(2).replace('.',','); }
+function parseBR(v){ return parseFloat(v.replace(',','.'))||0; }
 
-function parseBR(valor){
-  return parseFloat(valor.replace(',', '.')) || 0;
-}
-
-function add(nome, preco, unidade){
+function add(nome,preco,unidade){
   let item = carrinho.find(p=>p.nome===nome);
-  if(item){
-    item.qtd += 0.1;
-  } else {
-    carrinho.push({nome, preco, qtd:0.1, unidade});
-  }
+  if(item){ item.qtd+=0.1; }
+  else{ carrinho.push({nome,preco,qtd:0.1,unidade}); }
   render();
 }
 
-function alterar(nome, valor){
+function alterar(nome,val){
   let item = carrinho.find(p=>p.nome===nome);
-  if(!item) return;
-
-  item.qtd = parseBR(valor);
-
-  if(item.qtd <= 0){
-    carrinho = carrinho.filter(p=>p.nome!==nome);
-  }
-
+  item.qtd=parseBR(val);
+  if(item.qtd<=0){ carrinho=carrinho.filter(p=>p.nome!==nome); }
   render();
 }
 
-function mais(nome){
-  let item = carrinho.find(p=>p.nome===nome);
-  item.qtd += 0.1;
-  render();
-}
-
+function mais(nome){ carrinho.find(p=>p.nome===nome).qtd+=0.1; render(); }
 function menos(nome){
-  let item = carrinho.find(p=>p.nome===nome);
-  item.qtd -= 0.1;
-  if(item.qtd <= 0){
-    carrinho = carrinho.filter(p=>p.nome!==nome);
-  }
+  let i=carrinho.find(p=>p.nome===nome);
+  i.qtd-=0.1;
+  if(i.qtd<=0){ carrinho=carrinho.filter(p=>p.nome!==nome); }
   render();
 }
 
 function render(){
-  let lista = document.getElementById("lista");
-  let total = 0;
-  lista.innerHTML = "";
+  let lista=document.getElementById("lista");
+  let total=0;
+  lista.innerHTML="";
 
   carrinho.forEach(item=>{
-    let sub = item.qtd * item.preco;
-    total += sub;
+    let sub=item.qtd*item.preco;
+    total+=sub;
 
-    lista.innerHTML += `
-      <div class="item">
-        <b>${item.nome}</b><br>
-        R$ ${formatBR(item.preco)} / ${item.unidade}<br>
+    lista.innerHTML+=`
+    <div class="item">
+      <b>${item.nome}</b><br>
+      R$ ${formatBR(item.preco)} / ${item.unidade}<br>
 
-        <button onclick="menos('${item.nome}')">-</button>
+      <button onclick="menos('${item.nome}')">-</button>
+      <input value="${formatBR(item.qtd)}" onchange="alterar('${item.nome}',this.value)">
+      <button onclick="mais('${item.nome}')">+</button>
 
-        <input value="${formatBR(item.qtd)}"
-               onchange="alterar('${item.nome}', this.value)">
-
-        <button onclick="mais('${item.nome}')">+</button>
-
-        <br>
-        Subtotal: R$ ${formatBR(sub)}
-      </div>
-    `;
+      <br>Subtotal: R$ ${formatBR(sub)}
+    </div>`;
   });
 
-  document.getElementById("total").innerText = formatBR(total);
+  document.getElementById("total").innerText=formatBR(total);
 }
 
 function whats(){
-  let msg = "Pedido:%0A";
-  let total = 0;
+  let msg="Pedido:%0A";
+  let total=0;
 
-  carrinho.forEach(item=>{
-    let sub = item.qtd * item.preco;
-    total += sub;
-
-    msg += `${item.nome} ${formatBR(item.qtd)} ${item.unidade} = R$ ${formatBR(sub)}%0A`;
+  carrinho.forEach(i=>{
+    let sub=i.qtd*i.preco;
+    total+=sub;
+    msg+=`${i.nome} ${formatBR(i.qtd)} ${i.unidade} = R$ ${formatBR(sub)}%0A`;
   });
 
-  msg += `%0ATotal: R$ ${formatBR(total)}`;
-
+  msg+=`%0ATotal: R$ ${formatBR(total)}`;
   window.open(`https://wa.me/5521968120591?text=${msg}`);
+}
+
+function pix(){
+  let total=document.getElementById("total").innerText;
+
+  document.getElementById("qrcode").innerHTML=`
+    <h4>Pagamento Pix</h4>
+    <p>Valor: R$ ${total}</p>
+    <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=PIX-${total}">
+  `;
 }
 </script>
 
